@@ -1,0 +1,30 @@
+[
+{
+    "fields": {
+        "first_name": "teenu",
+        "last_name": "teenu",
+        "gender": 1,
+        "date_of_birth": null,
+        "last_login": "2015-11-16T08:17:45.011Z",
+        "is_email_verified": false,
+        "owner": 1,
+        "email": "teenu@dispostable.com"
+    },
+    "model": "accounts.person",
+    "pk": 1
+},
+{
+    "fields": {
+        "first_name": "teenu1",
+        "last_name": "gupta1",
+        "gender": 1,
+        "date_of_birth": null,
+        "last_login": "2015-11-16T09:09:41.098Z",
+        "is_email_verified": false,
+        "owner": 2,
+        "email": "teenu.gupta@jaarvis.com"
+    },
+    "model": "accounts.person",
+    "pk": 2
+}
+]

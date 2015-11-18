@@ -1,0 +1,20 @@
+[
+{
+    "fields": {
+        "created_date": "2015-11-17",
+        "asked_by": 2,
+        "title": "test"
+    },
+    "model": "stackapp.question",
+    "pk": 1
+},
+{
+    "fields": {
+        "created_date": "2015-11-17",
+        "asked_by": 2,
+        "title": "test"
+    },
+    "model": "stackapp.question",
+    "pk": 2
+}
+]

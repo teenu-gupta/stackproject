@@ -1,0 +1,17 @@
+Hey there!
+<br>
+<br>
+
+Thank you for registering with Stack. We are happy to welcome you on-board!
+<br>
+Click on the link below to activate your Stack account.
+<br>
+<p>{{ protocol }}://{{ domain }}/#!/verify_email_confirm?uidb64={{uid}}&token={{token}}</p>
+
+<br>
+<br>
+
+Regards
+<br>
+Stack Team
+
