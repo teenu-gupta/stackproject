@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'rest_framework_swagger',
     'djcelery',
     'kombu.transport.django',
+    # 'django_extensions',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -181,3 +182,10 @@ EMAIL_PORT = 25
 COMM_EMAIL_SENDER = 'testmail0887@gmail.com'
 MAX_UPLOAD_SIZE = 5242880
 
+
+
+#for graph models
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
