@@ -1,10 +1,14 @@
 from django.contrib import admin
-
-# Register your models here.
-
+from import_export.admin import ImportExportModelAdmin
 from  stackapp.models import Question, Answer , Vote , Hashtags
+from stackapp.resources import QuestionResource
 
-admin.site.register(Question)
+class QuestionAdmin(ImportExportModelAdmin):
+	resource_class = QuestionResource
+	pass
+
+
+admin.site.register(Question,QuestionAdmin)
 admin.site.register(Answer)
 admin.site.register(Vote)
 admin.site.register(Hashtags)

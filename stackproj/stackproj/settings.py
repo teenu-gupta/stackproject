@@ -59,6 +59,7 @@ INSTALLED_APPS = (
     'rest_framework_swagger',
     'djcelery',
     'kombu.transport.django',
+    'import_export',
     # 'django_extensions',
 )
 
