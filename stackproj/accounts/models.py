@@ -37,7 +37,18 @@ class Person(models.Model):
 		return str(self.owner)
 
 
-
+	
+	def get_full_name(self):
+		if self.first_name is not None and self.last_name is not None:
+			full_name = '%s %s' % (self.first_name ,self.last_name)
+		elif self.first_name is not None:
+			full_name = '%s' %(self.first_name)
+		elif self.last_name is not None:
+			full_name = '%s' %(self.last_name)
+		else:
+			full_name = ''	
+		return full_name
+		
 	# #property to calculate the points
 	# @property
 	#    def user_score(self):

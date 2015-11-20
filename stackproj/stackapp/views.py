@@ -224,6 +224,7 @@ class QuestionAnswerList(Permission_classes,generics.GenericAPIView,QuestionOwne
 
 	def get(self,request,pk):
 		import ipdb;ipdb.set_trace()
+		# self .kwargs is for URL
 
 		data = self.model.objects.get(id=self.kwargs['pk'])
 		

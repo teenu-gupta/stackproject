@@ -34,13 +34,13 @@ class QuestionSerializer(serializers.ModelSerializer):
 
 class QuestionAnswerSerializer(serializers.ModelSerializer):
 	# answers = serializers.RelatedField(many=True,read_only=True,required = False)
-	answer = AnswerSerializer(many=True,read_only=True, required = False)
+	answer = AnswerSerializer(source='answer_of',many=True,read_only=True, required = False)
 	# answer=serializers.StringRelatedField(many=True,read_only= True,required=False)
 	
 	class Meta:
 		model = Question
 		fields = ('created_date','id','answer','title','hashtag')
-		read_only_fields = ('answer')
+		# read_only_fields = ('answer')
 		
 
 

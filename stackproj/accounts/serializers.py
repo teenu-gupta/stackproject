@@ -70,6 +70,7 @@ class PersonImageSerializer(serializers.ModelSerializer):
 
 class RegisterSerializer(serializers.ModelSerializer):
 
+
 	class Meta:
 		model = User
 		fields = ('first_name','last_name','password','email')
@@ -103,13 +104,16 @@ class TokenSerializer(serializers.Serializer):
 				
 
 class PersonSerializer(serializers.ModelSerializer):
-	profile_image = PersonImageSerializer()
-	class Meta:
-		model = Person
-		fields = ('email','gender','date_of_birth','first_name' , 'last_name','profile_image')
-		read_only_fields = ('owner','profile_image')
+    profile_image = PersonImageSerializer()
+    full_name = serializers.ReadOnlyField(source='get_full_name')
 
-		
+    class Meta:
+        model = Person
+        # fields = ('email','gender','date_of_birth','first_name','last_name','profile_image')
+        fields = ('email','gender','date_of_birth','full_name','profile_image')
+        read_only_fields = ('owner','profile_image','full_name')
+
+
 
 
 
@@ -131,11 +135,15 @@ class PassChangeSerializer(serializers.Serializer):
 class EmailVerifySerializer(serializers.Serializer):
     email = serializers.EmailField()
 
-    # def validate_email(self, attrs):
-    #     email = attrs['email'].lower()
-    #     if email and Person.objects.filter(owner__email=email, is_email_verified=True).count():
-    #         raise serializers.ValidationError("Email already verified")
-    #     return attrs
+    # otherwise error is shown string indices must be integers
+
+    def validate_email(self, attrs):
+        import ipdb; ipdb.set_trace()
+        email = attrs[0].lower()
+
+        if email and Person.objects.filter(owner__email=email, is_email_verified=True).count():
+            raise serializers.ValidationError("Email already verified")
+        return attrs
 
 class ConfirmEmailSerializer(serializers.Serializer):
     token = serializers.CharField(max_length=256)
