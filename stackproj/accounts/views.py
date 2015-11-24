@@ -233,6 +233,7 @@ class PersonImageView(generics.GenericAPIView):
 	model = PersonImage
 	serializer_class = PersonImageSerializer
 	permission_classes = (permissions.IsAuthenticated,)
+	
 
 
 
@@ -242,15 +243,12 @@ class PersonImageView(generics.GenericAPIView):
 		serializer = self.serializer_class(profileimage)
 		return Response(data=serializer.data, status=status.HTTP_200_OK)
 
-	def put(self, request):
+	def put(self, request,format=None):
 		import ipdb;ipdb.set_trace()
-		profileimage = self.model.objects.get(owner__owner=request.user)
-		# file_obj = request.FILES['image']
-		# serializer = self.serializer_class(profileimage,ajax_response(data=request.data,files=request.FILES))
-		serializer = self.serializer_class(profileimage,data=request.data,files=request.FILES)								
-
-		#files=request.FILES
-
+		profileimage = self.model.objects.get(owner__owner=request.user.id)
+									
+		serializer = self.serializer_class(data=request.data)	
+		
 		if serializer.is_valid():
 			serializer.save()
 			return Response(data=serializer.data, status=status.HTTP_200_OK)

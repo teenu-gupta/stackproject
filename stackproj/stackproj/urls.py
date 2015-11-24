@@ -31,6 +31,8 @@ apiv1 = ApiSet(
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    # url(r'^docs/', include('rest_framework_swagger.urls')),
+    # url(r'^accounts/', include('accounts.urls')),
     url(r'^api/v1/', include(apiv1)),
 ]
 

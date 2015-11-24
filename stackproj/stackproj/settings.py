@@ -60,7 +60,7 @@ INSTALLED_APPS = (
     'djcelery',
     'kombu.transport.django',
     'import_export',
-    # 'django_extensions',
+    'django_extensions',
 )
 
 MIDDLEWARE_CLASSES = (

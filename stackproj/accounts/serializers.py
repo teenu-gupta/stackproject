@@ -59,12 +59,15 @@ class Base64ImageField(serializers.ImageField):
 
 
 class PersonImageSerializer(serializers.ModelSerializer):
-	# image = Base64ImageField(max_length=None, use_url=True)
+    # image = Base64ImageField(max_length=None, use_url=True)
 
+    image = serializers.ImageField(max_length=None)
+    
 
-	class Meta:
-		model = PersonImage
-		fields = ('image',)
+    class Meta:
+        model = PersonImage
+        fields = ('image','owner')
+        read_only_fields = ('owner',)
 
 
 
@@ -138,7 +141,7 @@ class EmailVerifySerializer(serializers.Serializer):
     # otherwise error is shown string indices must be integers
 
     def validate_email(self, attrs):
-        import ipdb; ipdb.set_trace()
+        # import ipdb; ipdb.set_trace()
         email = attrs[0].lower()
 
         if email and Person.objects.filter(owner__email=email, is_email_verified=True).count():

@@ -223,7 +223,7 @@ class QuestionAnswerList(Permission_classes,generics.GenericAPIView,QuestionOwne
 	
 
 	def get(self,request,pk):
-		import ipdb;ipdb.set_trace()
+		# import ipdb;ipdb.set_trace()
 		# self .kwargs is for URL
 
 		data = self.model.objects.get(id=self.kwargs['pk'])
@@ -234,42 +234,6 @@ class QuestionAnswerList(Permission_classes,generics.GenericAPIView,QuestionOwne
 		return Response(serializer.data)
 
 	
-	# def get_queryset(self,kwargs):
-	# 	return Question.objects.get(id=self.kwargs['pk'])
-
-	# def get(self,request,pk):
-	# 	serializer = self.serializer_class(data=request.data)
-	# 	return Response(serializer.data,status=status.HTTP_200_OK)
-	
-	# def get(self,request,pk):
-	# 	import ipdb;ipdb.set_trace()
-	# 	# question_valid = self.validate_questiondata(pk)
-	# 	# if question_valid:
-	# 		# question = Question.objects.get(id=pk)
-	# 		# data = []
-	# 		# data.append(question)
-	# 	try:
-	# 		data = []
-
-	# 		a  = Question.objects.get(id=pk)
-	# 		if a:
-	# 			data.append(a)
-	# 		else:
-	# 			data = []
-	# 		answer = Answer.objects.filter(question=pk)
-	# 		data.append(answer)
-
-			
-	# 		# serializer= self.serializer_class(data)	
-	# 		# if serializer.is_valid():
-	# 		serializer =self.serializer_class(data)
-	# 		return Response(data=serializer.data,status=status.HTTP_200_OK)
-	
-	# 	except Answer.DoesNotExist:
-	# 		return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-		
-
-
 class UserDashboard(generics.GenericAPIView):
 
 	"""
@@ -299,52 +263,47 @@ class VotingQuestionAnswer(Permission_classes,generics.GenericAPIView):
 		import ipdb;ipdb.set_trace()
 
 
-		if request.data['answer'] == 0 :
+		if request.GET.has_key('answer'):
+
 			ques_obj = Question.objects.get(id=request.data['question'])
 			ques_list = Question.objects.filter(asked_by=request.user)
 
 			vote_ques = Vote.objects.filter(question=request.data['question'],voted_by=request.user).count()
-			try:
-				if ques_obj in ques_list:
-					raise PermissionDenied(detail="User cannot vote on the question posted by him")
-				elif vote_ques > 0 :
-					raise PermissionDenied(detail="User has already voted")
-				else:
+			
+			if ques_obj in ques_list:
+				raise PermissionDenied(detail="User cannot vote on the question posted by him")
+			elif vote_ques > 0 :
+				raise PermissionDenied(detail="User has already voted")
+			else:
+				pass
 
-					serializer = self.serializer_class(data=request.data)
-		
-					if serializer.is_valid():
-				
-						serializer.validated_data['voted_by'] = request.user
-				
-						serializer.save()
-						return Response(serializer.data,status=status.HTTP_200_OK)
-			except Question.DoesNotExist:
-				return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-		elif request.data['question'] == 0 :
+		elif request.GET.has_key('question'):
 			ans_obj = Answer.objects.get(id=request.data['answer'])
 			ans_list = Answer.objects.filter(answered_by=request.user)
 
 			vote_ans = VoteAnswer.objects.filter(answer=request.data['answer'],voted_by=request.user).count()
 
 			
-			try:
-				if ans_obj in ans_list:
-					raise PermissionDenied(detail="User cannot vote on the answer posted by him")
-				elif vote_ans > 0 :
-					raise PermissionDenied(detail="User has already voted")
-				else:
+			
+			if ans_obj in ans_list:
+				raise PermissionDenied(detail="User cannot vote on the answer posted by him")
+			elif vote_ans > 0 :
+				raise PermissionDenied(detail="User has already voted")
+			else:
+				pass
+		else:
+			pass
 
-					serializer = self.serializer_class(data=request.data)
+
+		serializer = self.serializer_class(data=request.data)
 		
-					if serializer.is_valid():
-				
-						serializer.validated_data['voted_by'] = request.user
-				
-						serializer.save()
-						return Response(serializer.data,status=status.HTTP_200_OK)
-			except Question.DoesNotExist:
-				return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+		if serializer.is_valid():
+	
+			serializer.validated_data['voted_by'] = request.user
+	
+			serializer.save()
+			return Response(serializer.data,status=status.HTTP_200_OK)
+
 		else:
 			return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
