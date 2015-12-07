@@ -18,6 +18,8 @@ import os
 import djcelery
 djcelery.setup_loader()
 
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
+
 # #Broker settings
 # BROKER_HOST ="localhost"
 # BROKER_PORT = 5672
@@ -45,6 +47,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -92,6 +95,11 @@ TEMPLATES = [
         },
     },
 ]
+
+#for the suits seetings
+TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+    'django.core.context_processors.request',
+)
 
 WSGI_APPLICATION = 'stackproj.wsgi.application'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -168,6 +176,25 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATIC_ROOT = 'staticfiles'
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    )
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+
+
+
+
+
 PROTOCOL = 'http'
 
 EMAIL_HOST = 'localhost'

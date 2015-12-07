@@ -14,10 +14,12 @@ class Hashtags(models.Model):
 
 
 class Question(models.Model):
+	CHOICE_STATUS = (("raised",_("Raised")),("posted",_("Posted")),("answered",_("Answered")),("irrelevant",_("Irrelevant")))
 	title = models.CharField(max_length=200)
 	asked_by = models.ForeignKey(User)
 	created_date = models.DateField(auto_now=True)
 	hashtag = models.ManyToManyField(Hashtags,blank=True)
+	status = models.CharField(max_length=200,choices=CHOICE_STATUS,blank=True,null=True,default=CHOICE_STATUS[0][0])
 
 	def __unicode__(self):
 		return self.title

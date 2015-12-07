@@ -109,7 +109,7 @@ class Logout(APIView):
 		# import ipdb; ipdb.set_trace()
 		try:
 			logout(request)
-			return Response({'sucsess':'Sucessfully Logged out.'},status= status.HTTP_200_OK)
+			return Response({'success':'Sucessfully Logged out.'},status= status.HTTP_200_OK)
 		except Exception, e:
 			print e
 		return Response (status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -5,7 +5,28 @@ ______________
 Email address (leave blank to use 'teenu'): teenu.gupta@jaarvis.com
 Username: teenu
 test1234
-________________________________
+_________________
+
+Email address: tinu@gmail.com
+Username: tinu 
+Password:  test1234
+Password (again): 
+Superuser created successfully.
+
+__________________________
+
+
+Normal User -
+
+Stack User - tanu@gmail.com
+test1234
+
+tanu
+gupta
+
+Created by adding the Groups and adding the permissions
+
+_______________
 
 teenu@dispostable.com
 test1234

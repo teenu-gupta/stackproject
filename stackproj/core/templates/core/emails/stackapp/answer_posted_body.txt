@@ -1,0 +1,6 @@
+Dear {{full_name}} , 
+
+Answer posted succesful
+
+Thanks And Regards
+Stack Team
